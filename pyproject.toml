@@ -1,0 +1,54 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fvmkit"
+version = "0.1.0"
+description = "Conservative finite-volume kernels for radial diffusion, with a verification harness that proves they converge."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "chinokoyuki" }]
+keywords = [
+    "finite-volume",
+    "radial-diffusion",
+    "heat-transfer",
+    "mass-transfer",
+    "crank-nicolson",
+    "verification",
+    "convergence-order",
+    "numerical-methods",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Mathematics",
+    "Topic :: Scientific/Engineering :: Physics",
+]
+dependencies = []
+
+[project.optional-dependencies]
+# Reference solutions fall back to a built-in Bessel implementation, but scipy
+# makes root finding and special functions faster and slightly more accurate.
+reference = ["scipy>=1.9"]
+plot = ["matplotlib>=3.5"]
+dev = ["pytest>=7"]
+
+[project.urls]
+Homepage = "https://github.com/chinokoyuki/fvmkit"
+Issues = "https://github.com/chinokoyuki/fvmkit/issues"
+
+[tool.setuptools.packages.find]
+include = ["fvmkit*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-q"
